@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "baseUrl": "src",
+        "target": "esnext",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": false,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve"
+    },
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/**/*.ts", "src/utils/useAuth.js", "src/services/index.js"],
+    "exclude": ["node_modules"],
+    "paths": {
+        "components/*": ["./src/components/*"],
+        "layouts/*": ["./layouts/*"],
+        "utils/*": ["./utils/*"],
+        "assets/*": ["./assets/*"]
+    }
+}
