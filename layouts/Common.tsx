@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import React, { FunctionComponent, useState } from 'react'
 import Header from 'widgets/Header/Index'
 import Mobile from 'widgets/Header/Mobile'
@@ -13,7 +12,11 @@ const Common: FunctionComponent<Props> = ({ children }) => {
         <>
             <Mobile setShowNavbar={setShowNavbar} showNavbar={showNavbar} />
             <Header setShowNavbar={setShowNavbar} />
-            {children}
+            <div className=" flex w-full justify-center">
+                <div className=" flex relative flex-wrap w-full landing-max">
+                    {children}
+                </div>
+            </div>
         </>
     )
 }

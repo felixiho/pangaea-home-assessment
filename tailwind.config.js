@@ -9,6 +9,7 @@ module.exports = {
           200: '#3d5b57',
           300: "#2b2e2b",
           400: "#c6ccc7",
+          500: "#cdd1ce",
         },
         light: {
           100: "#f5f5f4",
