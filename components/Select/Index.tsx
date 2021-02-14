@@ -8,16 +8,23 @@ type Option = {
 }
 interface Props {
     label?: string,
-    options: Option[]
+    options: Option[],
+    selected: number | Boolean,
+    handleChange?: Function,
+    small? : Boolean
 }
 const Select = (props: Props) => {
     const { label, options } = props
     const [active, setActive] = useState<Boolean>(false)
     return (
         <div className={`${active ? "border-black" : "border-brown-500"} font-thin border bg-white relative inline-flex w-full`}>
-            <select defaultValue="DEFAULT" onBlur={() => setActive(false)} onFocus={() => setActive(true)}
-                className="w-full  px-4 py-6  transition ease-linear duration-200 cursor-pointer appearance-none focus:outline-none pr-8">
-                <option disabled  value="DEFAULT" >{label}</option>
+            <select
+                {...(!props.selected && { defaultValue: "DEFAULT" })}
+                onChange={() => props.handleChange()}
+                onBlur={() => setActive(false)}
+                onFocus={() => setActive(true)}
+                className={`w-full ${props.small ? "p-1 pl-2 text-sm" : " px-4 py-6 pr-8"}   transition ease-linear duration-200 cursor-pointer appearance-none focus:outline-none `}>
+                <option disabled value="DEFAULT" >{label}</option>
                 {
                     options.map(
                         option =>
@@ -25,13 +32,14 @@ const Select = (props: Props) => {
                                 className="font-thin"
                                 value={option.value}
                                 key={option.id}
+                                selected={option.id === props.selected}
                             >
                                 {option.title}
                             </option>
                     )
                 }
             </select>
-            <div className="absolute right-4 py-6  cursor-pointer">
+            <div className={`absolute ${props.small ? "py-1 right-2" : "right-4 py-6 "}   cursor-pointer`}>
                 <svg viewBox="0 0 24 24" role="presentation" className="text-brown-100 h-6 w-6" focusable="false" aria-hidden="true"><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z">
                 </path></svg>
             </div>

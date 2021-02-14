@@ -13,6 +13,7 @@ module.exports = {
           600: "#DADCDA",
           700: "#4b5548",
           800: "#2b2e2b",
+          900: "#696969"
         },
         light: {
           100: "#f5f5f4",
@@ -23,7 +24,8 @@ module.exports = {
       }
     },
     boxShadow: {
-      custom1: 'grey 0px 2px 3px -3px'
+      custom1: 'grey 0px 2px 3px -3px',
+      custom2: '0 -4px 12px rgb(0 0 0 / 15%)'
     },
     fontFamily: {
       display: ["Roboto Condensed", "sans-serif"],

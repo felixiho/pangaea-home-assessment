@@ -3,7 +3,8 @@ import Link from 'next/link'
 import styles from './Header.module.css'
 
 interface Props {
-    setShowNavbar: Function
+    setShowNavbar: Function,
+    setShowCart: Function
 }
 
 const Header = (props:Props) => {
@@ -37,12 +38,12 @@ const Header = (props:Props) => {
                 <Link href="/">
                     <a className="my-auto hover:text-brown-200 transition ease-linear duration-200">Account</a>
                 </Link>
-                <Link href="/">
+                <button onClick={()=>props.setShowCart(true)}>
                     <a className="mx-5 pt-1 inline-flex relative ">
                         <img src="/cart.png" alt="Cart" width="25" height="21" />
                         <p className={`text-sm absolute ${styles.cart_value}`}>10</p>
                     </a>
-                </Link>
+                </button>
 
             </div>
         </header>

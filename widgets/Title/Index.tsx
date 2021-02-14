@@ -37,6 +37,7 @@ const Title = () => {
                         <Select
                             label="Filter by"
                             options={filters}
+                            selected={2}
                         />
                     </div>
                 </div>
