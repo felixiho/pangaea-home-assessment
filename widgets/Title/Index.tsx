@@ -25,17 +25,20 @@ const Title = () => {
         }
     ]
     return (
-        <section className="w-full flex flex-wrap mt:my-20 my-14 px-4 md:px-10">
-            <div className="md:w-1/2 w-full flex flex-wrap">
-                <h1 className="md:text-5xl text-3xl w-full">All Products</h1>
-                <p className="mt-6 font-thin">A 360° look at Lumin</p>
-            </div>
-            <div className="md:w-1/2 w-full md:mt-auto mt-10 flex flex-wrap md:justify-end">
-                <div className={styles.select_custom}>
-                    <Select
-                        label="Filter by"
-                        options={filters}
-                    />
+        <section className=" flex w-full justify-center">
+            <div className=" flex relative flex-wrap w-full landing-max mt:my-20 my-14 px-4 md:px-10">
+
+                <div className="md:w-1/2 w-full flex flex-wrap">
+                    <h1 className="md:text-5xl text-3xl w-full">All Products</h1>
+                    <p className="mt-6 font-thin">A 360° look at Lumin</p>
+                </div>
+                <div className="md:w-1/2 w-full md:mt-auto mt-10 flex flex-wrap md:justify-end">
+                    <div className={styles.select_custom}>
+                        <Select
+                            label="Filter by"
+                            options={filters}
+                        />
+                    </div>
                 </div>
             </div>
         </section>

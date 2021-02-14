@@ -13,7 +13,7 @@ const Common: FunctionComponent<Props> = ({ children }) => {
             <Mobile setShowNavbar={setShowNavbar} showNavbar={showNavbar} />
             <Header setShowNavbar={setShowNavbar} />
             <div className=" flex w-full justify-center">
-                <div className=" flex relative flex-wrap w-full landing-max">
+                <div className=" flex relative flex-wrap w-full ">
                     {children}
                 </div>
             </div>

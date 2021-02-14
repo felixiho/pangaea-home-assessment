@@ -10,10 +10,12 @@ module.exports = {
           300: "#2b2e2b",
           400: "#c6ccc7",
           500: "#cdd1ce",
+          600: "#DADCDA"
         },
         light: {
           100: "#f5f5f4",
           200: "#f2f2ef",
+          300: "#e2e6e3",
         }
       }
     },
