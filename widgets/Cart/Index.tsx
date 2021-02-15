@@ -1,12 +1,12 @@
 import Cancel from 'components/Button/Cancel'
 import PrimaryButton from 'components/Button/Primary'
 import Select from 'components/Select/Index'
-import Link from 'next/link'
+import { motion } from "framer-motion"
 import { Fragment, useEffect, useRef } from 'react'
 import styles from './Cart.module.css'
 import CartItems from './CartItems'
 import { useSelector, useDispatch } from 'react-redux'
-import {addActiveCurrency} from 'redux/actions/products'
+import { addActiveCurrency } from 'redux/actions/products'
 
 
 interface Props {
@@ -56,10 +56,42 @@ const Cart = (props: Props) => {
         })
         return total.toFixed(2)
     }
+
+
+    const variants = {
+        open: { opacity: 1, x: 0 },
+        closed: { opacity: 0, x: "100%" },
+    }
+    const sectionVariants = {
+        open: {
+            backdropFilter: `blur(3px)`
+        },
+        visible: {
+            display: "flex",
+        },
+        close: {
+            backdropFilter: "none"
+        },
+        hidden: {
+            transitionEnd: {
+                display: "hidden",
+            },
+        },
+    }
     return (
         <Fragment>
-            <section onKeyDown={handleKeyDown} className={`${showCart ? styles.cart_backdrop + " w-full h-screen fixed bg-light-200 flex z-20" : 'hidden'} flex flex-wrap justify-end flex-col`}>
-                <div className={`h-screen fixed w-full z-50 opacity-100  py-5  md:py-10 bg-opacity-100 bg-light-200 right-0 ` + styles.cart_parent}>
+            <motion.section
+                animate={showCart ? "open visible" : "close hidden"}
+                variants={sectionVariants}
+                transition={{  duration: 0.7 }}
+                onKeyDown={handleKeyDown}
+                className={`${showCart ?    " h-screen fixed bg-light-200  z-20" : ''}  flex-wrap justify-end w-full flex-col ${styles.cart_backdrop}`}>
+                <motion.div
+                    animate={showCart ? "open" : "closed"}
+                    variants={variants}
+                    transition={{ duration: 0.7, delay: 0 }}
+
+                    className={`h-screen fixed w-full z-50 opacity-0  py-5  md:py-10 bg-opacity-100 bg-light-200 right-0 ` + styles.cart_parent}>
                     <div className="w-full flex flex-wrap md:px-8 px-4">
                         <div className="relative w-full ">
                             <Cancel buttonRef={buttonRef} handleClick={setShowCart} />
@@ -92,9 +124,9 @@ const Cart = (props: Props) => {
                         </div>
                     </div>
 
-                </div>
+                </motion.div>
 
-            </section>
+            </motion.section>
 
         </Fragment>
     )

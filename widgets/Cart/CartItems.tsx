@@ -9,13 +9,12 @@ const CartItems = () => {
     return (
         <section className={`w-full mb-12`}>
             {
-                cart.cartItems.length &&
                 cart.cartItems.map(
                     cartItem =>
                         <CartProduct
                             key={cartItem.id}
                             quantity={cartItem.quantity}
-                             item={getItem(cartItem.id)}
+                            item={getItem(cartItem.id)}
                         />
                 )
             }

@@ -20,7 +20,7 @@ const Header = (props:Props) => {
         setTotal(_total)
     },[cart])
     return (
-        <header className="w-full border-b font-light   shadow-custom1 py-2 md:px-10 px-4 flex justify-between">
+        <header className="w-full border-b font-light fixed bg-white z-10  shadow-custom1 py-2 md:px-10 px-4 flex justify-between">
             <div className="md:inline-flex hidden">
                 <Link href="/">
                     <a className="mr-24">

@@ -25,7 +25,7 @@ const Mobile = (props: Props) => {
     }
     return (
         <Fragment>
-            <header onKeyDown={handleKeyDown} className={`${showNavbar ? "w-full h-screen fixed bg-light-200 flex z-10" : 'hidden'} px-8 py-10 flex flex-wrap flex-col`}>
+            <header onKeyDown={handleKeyDown} className={`${showNavbar ? "w-full h-screen fixed bg-light-200 flex z-10" : 'hidden'} px-8 py-10 flex flex-wrap flex-col z-30`}>
                 <div className="relative w-full">
                     <Cancel buttonRef={buttonRef} handleClick={setShowNavbar} />
                 </div>

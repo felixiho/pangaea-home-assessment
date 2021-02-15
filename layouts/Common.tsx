@@ -42,7 +42,7 @@ const Common = ({ children }) => {
             <Cart showCart={cart.showCart} setShowCart={dispatch} />
             <Mobile setShowNavbar={setShowNavbar} showNavbar={showNavbar} />
             <Header setShowNavbar={setShowNavbar} setShowCart={dispatch} />
-            <div className={`${cart.showCart ? 'fixed':''} flex w-full justify-center`}>
+            <div className={`${cart.showCart ? '':''} flex w-full justify-center pt-10 md:pt-20`}>
                 <div className=" flex relative flex-wrap w-full ">
                     {children}
                 </div>
