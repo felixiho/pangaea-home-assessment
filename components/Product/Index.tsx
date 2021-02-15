@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart } from "redux/actions/cart";
 import { ProductType } from "types/ProductType";
+import { showCart } from 'redux/actions/cart'
 
 
 const Product = (props: ProductType) => {
@@ -11,6 +12,10 @@ const Product = (props: ProductType) => {
     const handleClick = () => {
         dispatch(addToCart({
             id: props.id,
+        }))
+        dispatch(
+        showCart({
+            type: true
         }))
     }
     return (

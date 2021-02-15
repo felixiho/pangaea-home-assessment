@@ -18,3 +18,10 @@ export const removeFromCart = (params) => {
         payload: params
     }
 };
+
+export const showCart = (params) => {
+    return {
+        type: types.SHOW_CART,
+        payload: params
+    }
+};
