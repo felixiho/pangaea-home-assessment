@@ -36,7 +36,7 @@ const Products = () => {
                 {
                     products.allProducts.length &&
                     products.allProducts.map(product =>
-                        <div key={product.id} className="md:w-1/3 w-1/2 lg:px-10 md:px-4 px-2">
+                        <div key={product.id} className="md:w-1/3 w-1/2 lg:px-10 md:px-4 px-2 mt-auto">
                             <Product
                                 id={product.id}
                                 image_url={product.image_url}
