@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { useSelector} from 'react-redux'
 import styles from './Header.module.css'
 
 interface Props {
@@ -8,6 +10,15 @@ interface Props {
 }
 
 const Header = (props:Props) => {
+    const [total, setTotal] = useState(0)
+    const cart = useSelector((state) => state.cart)
+    useEffect(()=> {
+        let _total = 0
+        cart.cartItems.map(items => {
+            _total+= items.quantity
+        })
+        setTotal(_total)
+    },[cart])
     return (
         <header className="w-full border-b font-light   shadow-custom1 py-2 md:px-10 px-4 flex justify-between">
             <div className="md:inline-flex hidden">
@@ -41,7 +52,7 @@ const Header = (props:Props) => {
                 <button onClick={()=>props.setShowCart(true)}>
                     <a className="mx-5 pt-1 inline-flex relative ">
                         <img src="/cart.png" alt="Cart" width="25" height="21" />
-                        <p className={`text-sm absolute ${styles.cart_value}`}>10</p>
+                        <p className={`text-sm absolute ${styles.cart_value}`}>{total}</p>
                     </a>
                 </button>
 
