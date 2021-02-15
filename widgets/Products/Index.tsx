@@ -11,10 +11,9 @@ const Products = () => {
     const products = useSelector((state) => state.products)
     const dispatch = useDispatch()
 
-
     const { loading, data, error } = useQuery(
         GET_ALL_PRODUCTS, {
-        variables: { currency: 'NGN' },
+        variables: { currency: products.activeCurrency},
     }
     );
 
@@ -28,9 +27,7 @@ const Products = () => {
         }
     }, [data])
 
-
-
-    if (loading || !products.allProducts.length) return <ProductLoader />
+    if ((!products.allProducts.length && loading) || !products.allProducts.length) return <ProductLoader />
     if (error) return <div>An error occurred</div>
 
     return (

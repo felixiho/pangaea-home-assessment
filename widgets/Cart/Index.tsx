@@ -5,6 +5,9 @@ import Link from 'next/link'
 import { Fragment, useEffect, useRef } from 'react'
 import styles from './Cart.module.css'
 import CartItems from './CartItems'
+import { useSelector, useDispatch } from 'react-redux'
+import {addActiveCurrency} from 'redux/actions/products'
+
 
 interface Props {
     setShowCart: Function,
@@ -12,149 +15,14 @@ interface Props {
 }
 
 const Cart = (props: Props) => {
+    const dispatch = useDispatch()
     const { setShowCart, showCart } = props
     const buttonRef = useRef(null)
-    const currency = [
-        "USD",
-        "AED",
-        "AFN",
-        "ALL",
-        "AMD",
-        "ANG",
-        "AOA",
-        "ARS",
-        "AUD",
-        "AWG",
-        "AZN",
-        "BAM",
-        "BBD",
-        "BDT",
-        "BGN",
-        "BIF",
-        "BMD",
-        "BND",
-        "BOB",
-        "BRL",
-        "BSD",
-        "BWP",
-        "BZD",
-        "CAD",
-        "CDF",
-        "CHF",
-        "CLP",
-        "CNY",
-        "COP",
-        "CRC",
-        "CVE",
-        "CZK",
-        "DJF",
-        "DKK",
-        "DOP",
-        "DZD",
-        "EGP",
-        "ETB",
-        "EUR",
-        "FJD",
-        "FKP",
-        "GBP",
-        "GEL",
-        "GIP",
-        "GMD",
-        "GNF",
-        "GTQ",
-        "GYD",
-        "HKD",
-        "HNL",
-        "HRK",
-        "HTG",
-        "HUF",
-        "IDR",
-        "ILS",
-        "INR",
-        "ISK",
-        "JMD",
-        "JPY",
-        "KES",
-        "KSG",
-        "KHR",
-        "KMF",
-        "KRW",
-        "KYD",
-        "KZT",
-        "LAK",
-        "LBP",
-        "LKR",
-        "LRD",
-        "LSL",
-        "MAD",
-        "MDL",
-        "MGA",
-        "MKD",
-        "MMK",
-        "MNT",
-        "MOP",
-        "MRO",
-        "MUR",
-        "MVR",
-        "MWK",
-        "MXN",
-        "MYR",
-        "MZN",
-        "NAD",
-        "NGN",
-        "NIO",
-        "NOK",
-        "NPR",
-        "NZD",
-        "PAB",
-        "PEN",
-        "PGK",
-        "PHP",
-        "PKR",
-        "PLN",
-        "PYG",
-        "QAR",
-        "RON",
-        "RSD",
-        "RUB",
-        "RWF",
-        "SAR",
-        "SBD",
-        "SCR",
-        "SEK",
-        "SGD",
-        "SHP",
-        "SLL",
-        "SOS",
-        "SRD",
-        "STD",
-        "SVC",
-        "SZL",
-        "THB",
-        "TJS",
-        "TOP",
-        "TRY",
-        "TTD",
-        "TWD",
-        "TZS",
-        "UAH",
-        "UGX",
-        "UYU",
-        "UZS",
-        "VND",
-        "VUV",
-        "WST",
-        "XAF",
-        "XCD",
-        "XOF",
-        "XPF",
-        "YER",
-        "ZAR",
-        "ZMW"
-    ]
+    const products = useSelector((state) => state.products)
+    const cart = useSelector((state) => state.cart)
 
     const currencyTransformed = []
-    currency.map((curr, index) => currencyTransformed.push({
+    products.currencies.map((curr, index) => currencyTransformed.push({
         id: index + 1,
         value: curr,
         title: curr
@@ -171,7 +39,23 @@ const Cart = (props: Props) => {
             setShowCart(false)
         }
     }
-    const total = 9093020
+
+    const handleCurrencyChange = (e) => {
+        dispatch(
+            addActiveCurrency({
+                currency: e.target.value
+            })
+        )
+    }
+    const getItem = (id) => products.allProducts.find(product => product.id === id)
+    const calculateTotal = () => {
+        let total = 0
+        cart.cartItems.map(items => {
+            let item = getItem(items.id)
+            total += item.price * items.quantity
+        })
+        return total.toFixed(2)
+    }
     return (
         <Fragment>
             <section onKeyDown={handleKeyDown} className={`${showCart ? styles.cart_backdrop + " w-full h-screen fixed bg-light-200 flex z-20" : 'hidden'} flex flex-wrap justify-end flex-col`}>
@@ -182,9 +66,10 @@ const Cart = (props: Props) => {
                             <h2 className="w-full text-center uppercase text-brown-900">your cart</h2>
                             <div className="w-20 mt-6">
                                 <Select
+                                    handleChange={handleCurrencyChange}
                                     label="Currency"
                                     options={currencyTransformed}
-                                    selected={1}
+                                    selected={products.activeCurrency}
                                     small={true}
                                 />
 
@@ -199,7 +84,7 @@ const Cart = (props: Props) => {
                     <div className="flex flex-wrap absolute bottom-0 w-full shadow-custom2 bg-light-200 md:p-8  p-4">
                         <div className=" w-full inline-flex justify-between ">
                             <h3 className="font-thin">Subtotal</h3>
-                            <h3>{currency[0]} {total}</h3>
+                            <h3>{products.activeCurrency} {calculateTotal()}</h3>
                         </div>
                         <div className="my-3 w-full">
                             <PrimaryButton type="button" value="PROCEED TO CHECKOUT" handleClick={() => { }} />

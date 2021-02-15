@@ -1,9 +1,12 @@
-import { FunctionComponent, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from 'widgets/Header/Index'
 import Mobile from 'widgets/Header/Mobile'
 import Cart from 'widgets/Cart/Index'
 import { useSelector, useDispatch } from 'react-redux'
 import {showCart}  from 'redux/actions/cart'
+import { useQuery } from '@apollo/client'
+import { GET_ALL_CURRENCIES } from 'services/graphql/queries/currencies'
+import {addActiveCurrency, addProductsCurrencies} from 'redux/actions/products'
 
 
 
@@ -16,6 +19,24 @@ const Common = ({ children }) => {
             type
         })
     )
+    const { data } = useQuery(
+        GET_ALL_CURRENCIES
+    )
+
+    useEffect(() => {
+        if (data) {
+            dispatcher(
+                addProductsCurrencies({
+                    currency: data.currency
+                })
+            )
+            dispatcher(
+                addActiveCurrency({
+                    currency: data.currency[0]
+                })
+            )
+        }
+    }, [data])
     return (
         <>
             <Cart showCart={cart.showCart} setShowCart={dispatch} />

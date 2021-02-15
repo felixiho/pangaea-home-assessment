@@ -6,7 +6,6 @@ const CartItems = () => {
     const cart = useSelector((state) => state.cart)
     const products = useSelector((state) => state.products)
     const getItem = (id) => products.allProducts.find(product => product.id === id)
-    const currency = "USD"
     return (
         <section className={`w-full mb-12`}>
             {
@@ -16,7 +15,7 @@ const CartItems = () => {
                         <CartProduct
                             key={cartItem.id}
                             quantity={cartItem.quantity}
-                            currency={currency} item={getItem(cartItem.id)}
+                             item={getItem(cartItem.id)}
                         />
                 )
             }

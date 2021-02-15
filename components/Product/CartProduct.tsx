@@ -1,4 +1,4 @@
-import {  useDispatch } from 'react-redux'
+import {  useDispatch, useSelector } from 'react-redux'
 import Quantity from "components/Button/Quantity";
 import { useRef } from "react";
 import { removeFromCart } from 'redux/actions/cart';
@@ -11,12 +11,12 @@ type Props = {
         image_url: string
     },
     quantity: number
-    currency: string
 }
 
 const CartProduct = (props: Props) => {
     const dispatch = useDispatch()
-    const { item, currency, quantity } = props
+    const products = useSelector((state) => state.products)
+    const { item, quantity } = props
     const buttonRef = useRef(null)
     const removeItem = (id: number) => {
         dispatch(
@@ -39,7 +39,7 @@ const CartProduct = (props: Props) => {
                 <p className="w-full text-xs mt-1 font-thin">One time purchase of Two Month supply.</p>
                 <div className="w-full inline-flex mt-3 justify-between">
                     <Quantity quantity={quantity} id={item.id} />
-                    <h2 className="font-thin overflow-hidden my-auto">{currency} {item.price}</h2>
+                    <h2 className="font-thin overflow-hidden my-auto">{products.activeCurrency} {(item.price*quantity).toFixed(2)}</h2>
                 </div>
             </div>
             <div className="w-2/6 md:mx-8 lg:mx-12 mx-4 my-auto">

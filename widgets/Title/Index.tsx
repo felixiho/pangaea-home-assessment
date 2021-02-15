@@ -37,7 +37,7 @@ const Title = () => {
                         <Select
                             label="Filter by"
                             options={filters}
-                            selected={2}
+                            selected={filters[0].value}
                         />
                     </div>
                 </div>

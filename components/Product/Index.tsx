@@ -9,12 +9,12 @@ import { showCart } from 'redux/actions/cart'
 
 const Product = (props: ProductType) => {
     const dispatch = useDispatch()
+    const products = useSelector((state) => state.products)
     const handleClick = () => {
         dispatch(addToCart({
             id: props.id,
         }))
-        dispatch(
-        showCart({
+        dispatch(showCart({
             type: true
         }))
     }
@@ -32,7 +32,7 @@ const Product = (props: ProductType) => {
             </div>
             <div className=" w-full my-auto">
                 <h3 className="mb-3 lg:text-base text-sm w-full   text-center">
-                    From: NGN {props.price}
+                    From: {products.activeCurrency} {props.price.toFixed(2 )}
                 </h3>
             </div>
 

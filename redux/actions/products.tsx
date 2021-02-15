@@ -6,3 +6,15 @@ export const addProducts = (params) => {
         payload: params
     }
 };
+export const addProductsCurrencies = (params) => {
+    return {
+        type: types.ADD_PRODUCTS_CURRENCIES,
+        payload: params
+    }
+};
+export const addActiveCurrency = (params) => {
+    return {
+        type: types.ADD_ACTIVE_CURRENCY,
+        payload: params
+    }
+};

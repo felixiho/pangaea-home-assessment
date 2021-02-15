@@ -9,7 +9,7 @@ type Option = {
 interface Props {
     label?: string,
     options: Option[],
-    selected: number | Boolean,
+    selected: string,
     handleChange?: Function,
     small? : Boolean
 }
@@ -20,7 +20,7 @@ const Select = (props: Props) => {
         <div className={`${active ? "border-black" : "border-brown-500"} font-thin border bg-white relative inline-flex w-full`}>
             <select
                 {...(!props.selected && { defaultValue: "DEFAULT" })}
-                onChange={() => props.handleChange()}
+                onChange={(e) => props.handleChange(e)}
                 onBlur={() => setActive(false)}
                 onFocus={() => setActive(true)}
                 className={`w-full ${props.small ? "p-1 pl-2 text-sm" : " px-4 py-6 pr-8"}   transition ease-linear duration-200 cursor-pointer appearance-none focus:outline-none `}>
@@ -32,7 +32,7 @@ const Select = (props: Props) => {
                                 className="font-thin"
                                 value={option.value}
                                 key={option.id}
-                                selected={option.id === props.selected}
+                                selected={option.value === props.selected}
                             >
                                 {option.title}
                             </option>
