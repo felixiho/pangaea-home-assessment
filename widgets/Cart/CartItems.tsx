@@ -1,25 +1,26 @@
 import CartProduct from "components/Product/CartProduct"
-import styles from './Cart.module.css'
+import { useSelector } from 'react-redux'
+
 
 const CartItems = () => {
-
-    const item =  {
-        id: 1,
-        title: 'Ultra-Hydrating Moisturizing Balm',
-        price: 10000,
-        quantity: 1,
-        image_url: 'https://d1b929y2mmls08.cloudfront.net/luminskin/img/new-landing-page/charcoal-cleanser.png'
-    }
-    const currency =  "USD"
+    const cart = useSelector((state) => state.cart)
+    const products = useSelector((state) => state.products)
+    const getItem = (id) => products.allProducts.find(product => product.id === id)
+    const currency = "USD"
     return (
         <section className={`w-full mb-12`}>
-            <CartProduct currency={currency} item={item} />
-            <CartProduct currency={currency} item={item} />
-            <CartProduct currency={currency} item={item} />
-            <CartProduct currency={currency} item={item} />
-            <CartProduct currency={currency} item={item} />
-            <CartProduct currency={currency} item={item} />
-            <CartProduct currency={currency} item={item} />
+            {
+                cart.cartItems.length &&
+                cart.cartItems.map(
+                    cartItem =>
+                        <CartProduct
+                            key={cartItem.id}
+                            quantity={cartItem.quantity}
+                            currency={currency} item={getItem(cartItem.id)}
+                        />
+                )
+            }
+
         </section>
     );
 };

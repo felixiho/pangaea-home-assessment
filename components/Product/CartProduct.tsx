@@ -1,23 +1,29 @@
-import Cancel from "components/Button/Cancel";
+import {  useDispatch } from 'react-redux'
 import Quantity from "components/Button/Quantity";
 import { useRef } from "react";
+import { removeFromCart } from 'redux/actions/cart';
 
 type Props = {
     item: {
         id: number,
         title: string,
         price: number,
-        quantity: number
         image_url: string
     },
+    quantity: number
     currency: string
 }
 
 const CartProduct = (props: Props) => {
-    const { item, currency } = props
+    const dispatch = useDispatch()
+    const { item, currency, quantity } = props
     const buttonRef = useRef(null)
     const removeItem = (id: number) => {
-
+        dispatch(
+            removeFromCart({
+                id
+            })
+        )
     }
     return (
         <div className="w-full flex relative bg-white p-3 mb-3">
@@ -32,7 +38,7 @@ const CartProduct = (props: Props) => {
                 <p className="w-full text-xs mt-1 font-thin">Oily</p>
                 <p className="w-full text-xs mt-1 font-thin">One time purchase of Two Month supply.</p>
                 <div className="w-full inline-flex mt-3 justify-between">
-                    <Quantity quantity={item.quantity} />
+                    <Quantity quantity={quantity} id={item.id} />
                     <h2 className="font-thin overflow-hidden my-auto">{currency} {item.price}</h2>
                 </div>
             </div>

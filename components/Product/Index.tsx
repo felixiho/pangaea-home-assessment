@@ -1,17 +1,22 @@
 
 import PrimaryButton from "components/Button/Primary";
 import Link from "next/link";
+import { useSelector, useDispatch } from 'react-redux'
+import { addToCart } from "redux/actions/cart";
 import { ProductType } from "types/ProductType";
 
 
 const Product = (props: ProductType) => {
+    const dispatch = useDispatch()
     const handleClick = () => {
-        console.log(props.id)
+        dispatch(addToCart({
+            id: props.id,
+        }))
     }
     return (
         <div className="w-full flex flex-wrap flex-1 mb-32">
             <div className="w-full md:mx-8 mx-4 lex-1 ">
-                <Link href={"/product"+props.id}>
+                <Link href={"/product" + props.id}>
                     <a className="w-full">
                         <img src={props.image_url} className="object-contain flex-1  mt-auto w-full product-image" />
                         <h3 className="my-6 lg:text-base text-sm w-full text-center">{props.title}</h3>
