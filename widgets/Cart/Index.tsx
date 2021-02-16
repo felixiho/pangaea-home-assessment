@@ -27,12 +27,14 @@ const Cart = (props: Props) => {
         value: curr,
         title: curr
     }))
+    //To aid accessibility, set focus on  close button
     useEffect(() => {
         if (showCart) {
             buttonRef.current.focus()
         }
     }, [showCart])
 
+    // ESC key  should close cart drawer
     const handleKeyDown = (e) => {
         const ESC_CODE = 27 // keycode for esc key
         if (e.keyCode === ESC_CODE) {

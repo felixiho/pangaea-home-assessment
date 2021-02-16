@@ -12,6 +12,8 @@ interface Props {
 const Header = (props:Props) => {
     const [total, setTotal] = useState(0)
     const cart = useSelector((state) => state.cart)
+
+    //Calculate total anytime a change is done on cart
     useEffect(()=> {
         let _total = 0
         cart.cartItems.map(items => {

@@ -7,7 +7,7 @@ import {productsReducer} from 'redux/reducers/products/products'
 let store
 
 const initialState = {
-    
+
 }
 
 function initStore(preloadedState = initialState) {
